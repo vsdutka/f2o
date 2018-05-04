@@ -1,0 +1,12 @@
+version=12.1
+build=client64
+
+libdir=/usr/local/oracle/lib/oracle/${version}/${build}/lib
+includedir=/usr/local/oracle/include/oracle/${version}/${build}
+
+Name: oci8
+Description: Oracle database engine
+Version: ${version}
+Libs: -L${libdir} -locci -lnnz12 -lclntsh
+Libs.private:
+Cflags: -I${includedir}
