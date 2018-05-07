@@ -51,10 +51,6 @@ var uploadManyCmd = &cobra.Command{
 }
 
 func init() {
-for k, v := range os.Args {
-fmt.Println(k,">",v,"<")
-}
-
 	RootCmd.AddCommand(uploadManyCmd)
 	uploadManyCmd.PersistentFlags().StringVar(&dsn, "dsn", "", "Username/Password@ConnStr")
 	uploadManyCmd.PersistentFlags().StringVar(&configFileName, "config", "", "Name of config file")
