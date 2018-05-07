@@ -36,9 +36,6 @@ var uploadManyCmd = &cobra.Command{
 	Long:  `Upload files to Oracle DB via configuration file`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// TODO: Work your own magic here
-for k, v := range os.Args {
-fmt.Println(k,">",v,"<")
-}
 		if (dsn == "") || (configFileName == "") {
 			fmt.Println("Error:", "The UploadMany command demands presence of parameters")
 			os.Exit(-1)
@@ -54,6 +51,10 @@ fmt.Println(k,">",v,"<")
 }
 
 func init() {
+for k, v := range os.Args {
+fmt.Println(k,">",v,"<")
+}
+
 	RootCmd.AddCommand(uploadManyCmd)
 	uploadManyCmd.PersistentFlags().StringVar(&dsn, "dsn", "", "Username/Password@ConnStr")
 	uploadManyCmd.PersistentFlags().StringVar(&configFileName, "config", "", "Name of config file")
