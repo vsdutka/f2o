@@ -62,7 +62,7 @@ func uploadMany() error {
 		Schema string
 		Dl_id  *int64
 	}
-
+	fmt.Println("Open configuration file ", configFileName)
 	buf, err := ioutil.ReadFile(configFileName)
 	if err != nil {
 		return err
