@@ -73,6 +73,7 @@ func uploadMany() error {
 		return err
 	}
 	if len(infos) == 0 {
+		fmt.Println("Empty configuration")
 		return nil
 	}
 
