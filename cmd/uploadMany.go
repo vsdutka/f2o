@@ -46,7 +46,7 @@ var uploadManyCmd = &cobra.Command{
 			os.Exit(-1)
 		}
 
-		fmt.Println("upload completed")
+		fmt.Println("Upload completed")
 	},
 }
 
@@ -67,12 +67,18 @@ func uploadMany() error {
 	if err != nil {
 		return err
 	}
-	fmt.Println("Parse configuration file")
+	bom := []byte{0xef, 0xbb, 0xbf} // UTF-8
+
+	if bytes.Equal(buf[:3], bom) {
+		buf = buf[len(bom):]
+	}
+
+	fmt.Println("Parse configuration file - config length ", len(buf))
 	infos := make([]info, 0)
 	if err = json.Unmarshal(buf, &infos); err != nil {
 		return err
 	}
-	fmt.Println("infos = ", infos)
+	//fmt.Println("infos = ", infos)
 	if len(infos) == 0 {
 		fmt.Println("Empty configuration")
 		return nil
@@ -111,7 +117,7 @@ func uploadMany() error {
 			return name, filedesc
 
 		}()
-		fmt.Println("filepath =", v.Name, " filename =", filename, " filedesc =", filedesc)
+		//fmt.Println("filepath =", v.Name, " filename =", filename, " filedesc =", filedesc)
 		dl_id_Var := ora.Int64{true, 0}
 		if v.Dl_id != nil {
 			dl_id_Var.Value = *v.Dl_id
@@ -123,7 +129,7 @@ func uploadMany() error {
 			schemaVar.Value = v.Schema
 		}
 
-		fmt.Println("Read file ", v.Name)
+		//fmt.Println("Read file ", v.Name)
 		b, err := ioutil.ReadFile(v.Name)
 		if err != nil {
 			return err
