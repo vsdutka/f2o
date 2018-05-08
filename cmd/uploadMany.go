@@ -96,10 +96,22 @@ func uploadMany() error {
 
 	for _, v := range infos {
 
-		filename := func() string {
+		filename, filedesc := func() (string, string) {
 			_, name := path.Split(strings.Replace(v.Name, "\\", "/", -1))
-			return name
+			ext := path.Ext(name)
+			name = name[:len(name)-len(ext)]
+
+			parts := strings.Split(name, "~")
+			if len(parts) < 2 {
+				filedesc = parts[0]
+			} else {
+				filedesc = parts[1]
+			}
+			name = parts[0] + ext
+			return name, filedesc
+
 		}()
+		fmt.Println("filepath =", v.Name, " filename =", filename, " filedesc =", filedesc)
 		dl_id_Var := ora.Int64{true, 0}
 		if v.Dl_id != nil {
 			dl_id_Var.Value = *v.Dl_id
@@ -122,7 +134,7 @@ func uploadMany() error {
 		if _, err = ses.PrepAndExe(stm, body, schemaVar, filename, filedesc, dl_id_Var); err != nil {
 			return err
 		}
-		fmt.Printf("File \"%s\" for scheme \"%s\" and DL_ID=%v successfully uploaded\n", v.Name, v.Schema, *v.Dl_id)
+		fmt.Printf("File \"%s\" for scheme \"%s\" and DL_ID=%v successfully uploaded\n", v.Name, v.Schema, v.Dl_id)
 	}
 	return nil
 }
