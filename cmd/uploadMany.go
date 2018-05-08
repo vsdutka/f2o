@@ -72,6 +72,7 @@ func uploadMany() error {
 	if err = json.Unmarshal(buf, &infos); err != nil {
 		return err
 	}
+	fmt.Println("infos = ", infos)
 	if len(infos) == 0 {
 		fmt.Println("Empty configuration")
 		return nil
