@@ -94,12 +94,9 @@ func uploadMany() error {
 
 	for _, v := range infos {
 
-		filepath, filename := func() (string, string) {
+		filename := func() string {
 			_, name := path.Split(strings.Replace(v.Name, "\\", "/", -1))
-			//		ext := path.Ext(name)
-			//		name = name[:len(name)-len(ext)]
-
-			return filename, name
+			return name
 		}()
 		dl_id_Var := ora.Int64{true, 0}
 		if v.Dl_id != nil {
@@ -112,8 +109,8 @@ func uploadMany() error {
 			schemaVar.Value = v.Schema
 		}
 
-		fmt.Println("Read file ", filepath)
-		b, err := ioutil.ReadFile(filepath)
+		fmt.Println("Read file ", v.Name)
+		b, err := ioutil.ReadFile(v.Name)
 		if err != nil {
 			return err
 		}
