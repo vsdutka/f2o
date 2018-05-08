@@ -67,7 +67,7 @@ func uploadMany() error {
 	if err != nil {
 		return err
 	}
-
+	fmt.Println("Parse configuration file")
 	infos := make([]info, 0)
 	if err = json.Unmarshal(buf, &infos); err != nil {
 		return err
@@ -112,6 +112,7 @@ func uploadMany() error {
 			schemaVar.Value = v.Schema
 		}
 
+		fmt.Println("Read file ", filepath)
 		b, err := ioutil.ReadFile(filepath)
 		if err != nil {
 			return err
