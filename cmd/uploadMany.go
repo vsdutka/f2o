@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"path"
-	"strings"
+	//	"path"
+	//	"strings"
 
 	"github.com/spf13/cobra"
 	"gopkg.in/rana/ora.v4"
