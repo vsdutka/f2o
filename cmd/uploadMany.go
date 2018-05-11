@@ -21,7 +21,7 @@ import (
 	"io/ioutil"
 	"os"
 	//	"path"
-	//	"strings"
+	"strings"
 
 	"github.com/spf13/cobra"
 	"gopkg.in/rana/ora.v4"
@@ -132,7 +132,7 @@ func uploadMany() error {
 		}
 
 		//fmt.Println("Read file ", v.Name)
-		b, err := ioutil.ReadFile(v.FileName)
+		b, err := ioutil.ReadFile(strings.ToLower(v.FileName))
 		if err != nil {
 			return err
 		}
