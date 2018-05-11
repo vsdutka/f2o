@@ -142,7 +142,7 @@ func uploadMany() error {
 		if _, err = ses.PrepAndExe(stm, body, schemaVar, v.Name, v.Desc, dl_id_Var); err != nil {
 			return err
 		}
-		fmt.Printf("File \"%s\" for scheme \"%s\" and DL_ID=%v successfully uploaded\n", v.Name, v.Schema, v.Dl_id)
+		fmt.Printf("File \"%s\" for scheme \"%s\" and DL_ID=%v successfully uploaded\n", v.FileName, v.Schema, v.Dl_id)
 	}
 	return nil
 }
