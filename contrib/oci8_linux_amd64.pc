@@ -1,4 +1,4 @@
-version=12.1
+version=12.2
 build=client64
 
 libdir=/usr/local/oracle/lib/oracle/${version}/${build}/lib
